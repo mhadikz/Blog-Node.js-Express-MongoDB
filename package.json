@@ -1,0 +1,24 @@
+{
+  "name": "blog-node.js-express-mongodb",
+  "version": "1.0.0",
+  "description": "A Blog APIs service for posting content",
+  "main": "app.js",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "multer": "^1.4.3",
+    "nodemon": "^2.0.14"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "start": "nodemon ./dist/app.js",
+    "test": "jest",
+    "build": "tsc"
+  },
+  "author": "Mohammad Hadi Karamzadeh",
+  "license": "GPL-3.0-or-later"
+}
