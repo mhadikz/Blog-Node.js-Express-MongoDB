@@ -1,11 +1,15 @@
 import express from 'express'
 import { Database } from './configs/database'
 const app = express()
-import {port} from './configs/env'
+import { port } from './configs/env'
+import routerV1 from './routes/routerV1'
+
 Database.getInstance()
 
 app.use(express.json())
 
+app.use('/api/v1', routerV1)
+
 app.listen(port(), () => {
-   console.log(`We are on-air with port: ${port()}.`)
+   console.log(`We are listening on port: ${port()}.`)
 })
