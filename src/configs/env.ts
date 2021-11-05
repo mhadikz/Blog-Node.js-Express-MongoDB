@@ -15,3 +15,7 @@ export function dbPass() {
 export function port() {
    return process.env.PORT
 }
+
+export function jwtKey() {
+   return process.env.JWT_PRIVATE_KEY
+}
