@@ -7,5 +7,6 @@ const contentController = new ContentController()
 const authMiddleware = new AuthMiddleware()
 
 router.post('/add-post', authMiddleware.loginRequired, contentController.addPost)
+router.get('/posts', contentController.getAllPosts)
 
 export default router

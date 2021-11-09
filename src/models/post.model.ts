@@ -10,7 +10,7 @@ const PostSchema = new schema(
       comments: { type: Array },
       tags: { type: Array},
       categories: { type: Array},
-      publisheddAt: { type: Date, default: Date.now }
+      publishedAt: { type: Date, default: Date.now }
    },
    { collection: 'Post' }
 )

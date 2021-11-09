@@ -33,4 +33,14 @@ export class ContentController extends BaseController {
          return super.fail(res, error.toString())
       }
    }
+
+   async getAllPosts(req: Request | any, res: Response) {
+      try {
+         const posts = await Post.find({}).sort({publisheddAt: 'descending'}).select('-userId').select('-__v')
+
+         return super.ok(res, 'Posts are ready', posts)
+      } catch (error) {
+         return super.fail(res, error.toString())
+      }
+   }
 }
