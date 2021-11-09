@@ -6,6 +6,7 @@ const UserSchema = new schema(
       username: { type: String, require: true, lowercase: true, unique: true },
       password: { type: String, require: true },
       email: { type: String, require: true, lowercase: true, unique: true },
+      name: { type: String, require: true, lowercase: true },
       userId: { type: String, require: true, unique: true },
       createdAt: { type: Date, default: Date.now }
    },

@@ -12,13 +12,18 @@ export class AuthController extends BaseController {
    }
 
    async registerUser(req: Request, res: Response) {
-      const username = req.body.username
-      const password = req.body.password
-      const email = req.body.email
+      const { username, password, email, name } = req.body
+
       try {
          if (!username || !password || !email) return super.badRequest(res)
 
-         const user = await createUserObj(username, password, email)
+         const user = await new User({
+            username: username,
+            password: await hashPassword(password, 10),
+            email: email,
+            name: name,
+            userId: generateUserId()
+         })
 
          await user
             .save()
@@ -61,13 +66,4 @@ export class AuthController extends BaseController {
          return super.fail(res, error.toString())
       }
    }
-}
-
-async function createUserObj(username: string, password: string, email: string) {
-   return new User({
-      username: username,
-      password: await hashPassword(password, 10),
-      email: email,
-      userId: generateUserId()
-   })
 }
