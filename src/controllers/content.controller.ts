@@ -34,11 +34,28 @@ export class ContentController extends BaseController {
       }
    }
 
-   async getAllPosts(req: Request | any, res: Response) {
+   async getAllPosts(req: Request, res: Response) {
       try {
-         const posts = await Post.find({}).sort({publisheddAt: 'descending'}).select('-userId').select('-__v')
+         const posts = await Post.find({})
+            .sort({ publisheddAt: 'descending' })
+            .select('-userId')
+            .select('-__v')
 
          return super.ok(res, 'Posts are ready', posts)
+      } catch (error) {
+         return super.fail(res, error.toString())
+      }
+   }
+
+   async getPost(req: Request, res: Response) {
+      try {
+         const docId = req.params.id
+
+         const post = await Post.findOne({ _id: docId })
+
+         if (!post) return super.notFound(res)
+
+         return super.ok(res, 'Post is ready', post)
       } catch (error) {
          return super.fail(res, error.toString())
       }
