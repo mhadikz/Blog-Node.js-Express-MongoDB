@@ -48,14 +48,43 @@ export class ContentController extends BaseController {
    }
 
    async getPost(req: Request, res: Response) {
-      try {
-         const docId = req.params.id
+      const postId = req.params.id
 
-         const post = await Post.findOne({ _id: docId })
+      try {
+         const post = await Post.findOne({ _id: postId })
 
          if (!post) return super.notFound(res)
 
          return super.ok(res, 'Post is ready', post)
+      } catch (error) {
+         return super.fail(res, error.toString())
+      }
+   }
+
+   async updatePost(req: Request | any, res: Response) {
+      const username = req.user.username
+      const { title, body, tags, categories } = req.body
+      const postId = req.params.id
+
+      try {
+         if (!username || !title || !body || !tags || !categories) return super.badRequest(res)
+
+         const user = await User.findOne({ username })
+         const post = await Post.findOne({ _id: postId })
+
+         if (!user || !post) return super.notFound(res)
+         if (post.userId != user.userId) return super.forbidden(res)
+
+         const updatedPost = await Post.updateOne({
+            title: title,
+            body: body,
+            tags: tags,
+            categories: categories
+         })
+
+         if (!post) return super.notFound(res)
+
+         return super.ok(res, 'Post updated', updatedPost)
       } catch (error) {
          return super.fail(res, error.toString())
       }
