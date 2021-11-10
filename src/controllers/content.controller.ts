@@ -82,8 +82,6 @@ export class ContentController extends BaseController {
             categories: categories
          })
 
-         if (!post) return super.notFound(res)
-
          return super.ok(res, 'Post updated', updatedPost)
       } catch (error) {
          return super.fail(res, error.toString())
