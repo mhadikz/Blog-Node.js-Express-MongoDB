@@ -11,4 +11,6 @@ router.get('/posts', contentController.getAllPosts)
 
 router.get('/post/:id', contentController.getPost)
 router.put('/post/:id', authMiddleware.loginRequired, contentController.updatePost)
+ router.delete('/post/:id', authMiddleware.loginRequired, contentController.deletePost)
+
 export default router
