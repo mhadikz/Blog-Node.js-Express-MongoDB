@@ -135,4 +135,4 @@ Start the server
 
 ## Tech Stack
 
-**Server:** Node, Express, MongoDB, Mongoose, JsonWebToken
+**Server:** Node, Express, MongoDB, Docker, Mongoose, JsonWebToken
