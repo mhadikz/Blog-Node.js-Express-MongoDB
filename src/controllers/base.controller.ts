@@ -21,7 +21,7 @@ export class BaseController {
       return res.sendStatus(201)
    }
 
-   badRequest(res: Response, message?: string) {
+   badRequest(res: Response, message?: any) {
       return BaseController.jsonResponse(res, 400, message ? message : 'Bad request')
    }
 
@@ -57,7 +57,7 @@ export class BaseController {
       return BaseController.jsonResponse(res, 400, 'TODO')
    }
 
-   fail(res: Response, error: Error | string) {
-      return BaseController.jsonResponse(res, 500, error.toString())
+   fail(res: Response, error: any) {
+      return BaseController.jsonResponse(res, 500, error)
    }
 }

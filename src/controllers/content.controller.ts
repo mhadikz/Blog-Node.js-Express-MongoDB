@@ -1,7 +1,7 @@
 import { BaseController } from './base.controller'
 import { Request, Response } from 'express'
-import Post from '../models/post.model'
-import User from '../models/user.model'
+import Post from '../database/models/post.model'
+import User from '../database/models/user.model'
 
 export class ContentController extends BaseController {
    constructor() {

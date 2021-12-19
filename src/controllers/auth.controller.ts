@@ -1,10 +1,13 @@
 import { Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
-import User from '../models/user.model'
+import User from '../database/models/user.model'
 import { hashPassword, isPasswordValid } from '../utils/auth.util'
 import { generateUserId } from '../utils/uuid.util'
 import { BaseController } from './base.controller'
 import { jwtKey } from '../configs/env'
+import { plainToInstance } from 'class-transformer'
+import UserDTO from '../database/dtos/user.dto'
+import { validate } from 'class-validator'
 
 export class AuthController extends BaseController {
    constructor() {
@@ -15,7 +18,11 @@ export class AuthController extends BaseController {
       const { username, password, email, name } = req.body
 
       try {
-         if (!username || !password || !email) return super.badRequest(res)
+         const usetDto = plainToInstance(UserDTO, req.body)
+
+         await validate(usetDto).then(errors => {
+            if (errors.length > 0) return super.badRequest(res, errors)
+         })
 
          const user = await new User({
             username: username,
@@ -25,14 +32,10 @@ export class AuthController extends BaseController {
             userId: generateUserId()
          })
 
-         await user
-            .save()
-            .then((result: typeof User) => {
-               return super.ok(res, 'User account was created')
-            })
-            .catch((error: any) => {
-               return super.fail(res, error.toString())
-            })
+         const result = await user.save()
+         if (!result) return super.fail(res, result)
+
+         return super.ok(res, 'User account was created')
       } catch (error) {
          return super.fail(res, error.toString())
       }
