@@ -12,6 +12,10 @@ export function dbPass() {
    return process.env.DB_PASS
 }
 
+export function nodeEnv() {
+   return process.env.NODE_ENV
+}
+
 export function port() {
    return process.env.PORT
 }

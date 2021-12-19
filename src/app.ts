@@ -1,10 +1,12 @@
 import express from 'express'
 import { Database } from './configs/database'
 const app = express()
-import { port } from './configs/env'
+import { port, nodeEnv } from './configs/env'
 import routerV1 from './routes/routerV1'
 
-Database.getInstance()
+if (nodeEnv() == 'production') {
+   Database.getInstance()
+}
 
 app.use(express.json())
 

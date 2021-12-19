@@ -22,9 +22,9 @@
       "typescript": "^4.4.4"
    },
    "scripts": {
-      "dev": "",
-      "start": "rm -rf dist && npm run build && nodemon ./dist/app.js",
-      "test": "jest",
+      "dev": "NODE_ENV=development nodemon ./src/app.ts",
+      "start": "NODE_ENV=production rm -rf dist && npm run build && nodemon ./dist/app.js",
+      "test": "NODE_ENV=test jest",
       "build": "tsc"
    },
    "author": "Mohammad Hadi Karamzadeh",
