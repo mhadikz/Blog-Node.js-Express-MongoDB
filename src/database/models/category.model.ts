@@ -3,9 +3,9 @@ let schema = mongoose.Schema
 
 const CategorySchema = new schema(
    {
-      name: { type: String, require: true },
-      parentId: { type: Number, require: true },
-      id: { type: Number, require: true},
+      name: { type: String, required: true },
+      parentId: { type: Number, required: true },
+      id: { type: Number, required: true},
       createdAt: { type: Date, default: Date.now }
    },
    { collection: 'Category' }

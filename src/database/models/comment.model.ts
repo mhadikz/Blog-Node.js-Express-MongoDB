@@ -3,9 +3,9 @@ let schema = mongoose.Schema
 
 const CommentSchema = new schema(
    {
-      text: { type: String, require: true },
-      author: { type: String, require: true, lowercase: true },
-      email: { type: String, require: true, lowercase: true },
+      text: { type: String, required: true },
+      author: { type: String, required: true, lowercase: true },
+      email: { type: String, required: true, lowercase: true },
       createdAt: { type: Date, default: Date.now }
    },
    { collection: 'Comment' }
